@@ -1,6 +1,9 @@
-﻿using System;
+﻿using FluentAssertions.Data;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +13,18 @@ namespace TicTacToeGame
     public class Board
     {
         // Data field
-        private char[,] map; // [row, collumn]
-        private List<Point> markXhis = new List<Point>();
-        private List<Point> markYhis = new List<Point>();
+        private const int BOARD_SIZE = 3;
+        private static char[,] map; // [row, collumn]
+        private static List<Point> markXhis = new List<Point>();
+        private static List<Point> markYhis = new List<Point>();
 
 
         // Properties
         public char[,] Map { get => map; set => map = value; }
+        public static int GetXHisLength { get => MarkXhis.Count; }
+        public static int GetYHisLength { get => MarkYhis.Count; }
+        public static List<Point> MarkXhis { get => markXhis; }
+        public static List<Point> MarkYhis { get => markYhis; }
 
 
         // Constructor
@@ -43,54 +51,40 @@ namespace TicTacToeGame
             if (map[row, collumn] == ' ')
             {
                 map[row, collumn] = mark;
-                if (mark == 'X') markXhis.Add(new Point(row, collumn));
-                else markYhis.Add(new Point(row, collumn));
+                if (mark == 'X') MarkXhis.Add(new Point(row, collumn));
+                else MarkYhis.Add(new Point(row, collumn));
                 return true;
             } 
             return false;
         }
 
-        public bool Logic()
+        public bool Logic(char mark)
         {
             // Check rows
-            for (int row = 0; row < 4; row++)
+            for (int row = 1; row <= BOARD_SIZE; row++)
             {
-                if (map[row, 0] == map[row, 1] && map[row, 0] == map[row, 2] && map[row, 0] == map[row, 3] && map[row, 0] != ' ')
-                {
-                    return true;
-                }
+                if (map[row, 1] == map[row, 2] && map[row, 1] == map[row, 3] && map[row, 1] == mark) return true;
             }
 
             // Check columns
-            for (int col = 0; col < 4; col++)
+            for (int collumn = 1; collumn <= BOARD_SIZE; collumn++)
             {
-                if (map[0, col] == map[1, col] && map[0, col] == map[2, col] && map[0, col] == map[3, col] && map[0, col] != ' ')
-                {
-                    return true;
-                }
+                if (map[1,collumn] == map[2,collumn] && map[1,collumn] == map[3,collumn] && map[1,collumn] == mark) return true;
             }
 
             // Check main diagonal (top-left to bottom-right)
-            if (map[0, 0] == map[1, 1] && map[0, 0] == map[2, 2] && map[0, 0] == map[3, 3] && map[0, 0] != ' ')
-            {
-                return true;
-            }
+            if (map[1, 1] == map[2, 2] && map[1, 1] == map[3, 3] && map[1, 1] == mark) return true;
 
             // Check secondary diagonal (top-right to bottom-left)
-            if (map[0, 3] == map[1, 2] && map[0, 3] == map[2, 1] && map[0, 3] == map[3, 0] && map[0, 3] != ' ')
-            {
-                return true;
-            }
+            if (map[1, 3] == map[2, 2] && map[1, 3] == map[3, 1] && map[1, 3] == mark) return true;
 
+            // Return false when no win condition meet
             return false;
         }
 
-        public bool MarkAvailable(Point point)
-        {
-            foreach (char mark in map)
-            {
-                if (map[point.X, point.Y] != ' ') return true;
-            }
+        public static bool MarkAvailable(int row, int collumn)
+        {    
+            if (map[row, collumn] != ' ') return true;
             return false;
         }
 

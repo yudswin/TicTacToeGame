@@ -15,9 +15,9 @@ namespace TicTacToeGame
         {
             while (true)
             {
-                Console.Write("enter ROW cordinates : ");
+                Console.Write("enter ROW cordinates (1 - 3): ");
                 int row = int.Parse(Console.ReadLine());
-                Console.Write("enter COLLUMN cordinates : ");
+                Console.Write("enter COLLUMN cordinates (1 - 3): ");
                 int collumn = int.Parse(Console.ReadLine());
 
                 //  Exception 
