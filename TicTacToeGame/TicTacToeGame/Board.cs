@@ -51,11 +51,22 @@ namespace TicTacToeGame
             if (map[row, collumn] == ' ')
             {
                 map[row, collumn] = mark;
+
                 if (mark == 'X') MarkXhis.Add(new Point(row, collumn));
                 else MarkYhis.Add(new Point(row, collumn));
                 return true;
-            } 
-            return false;
+            }
+            else return false;
+        }
+
+        public bool NewMove(Point point, char mark)
+        {
+            if(!NewMove(point.X,point.Y, mark))
+            {
+                Console.WriteLine("Mark has been placed! Please change...");
+                return false;
+            }
+            return true;
         }
 
         public bool Logic(char mark)
@@ -101,17 +112,56 @@ namespace TicTacToeGame
         
         public void PrintBoard()
         {
-            
+            Console.ResetColor();   
             Console.WriteLine(" ___ ___ ___");
-            Console.WriteLine("| {0} | {1} | {2} |  1", map[1, 1], map[1, 2], map[1, 3]);
-            Console.WriteLine("|---|---|---|     R");
-            Console.WriteLine("| {0} | {1} | {2} |  2  O", map[2, 1], map[2, 2], map[2, 3]);
-            Console.WriteLine("|---|---|---|     W");
-            Console.WriteLine("| {0} | {1} | {2} |  3", map[3, 1], map[3, 2], map[3, 3]);
+            Console.WriteLine("| {0} | {1} | {2} |", map[1, 1], map[1, 2], map[1, 3]);
             Console.WriteLine("|---|---|---|");
-            Console.WriteLine("  1   2   3 ");
+            Console.WriteLine("| {0} | {1} | {2} |", map[2, 1], map[2, 2], map[2, 3]);
+            Console.WriteLine("|---|---|---|");
+            Console.WriteLine("| {0} | {1} | {2} |", map[3, 1], map[3, 2], map[3, 3]);
+            Console.WriteLine("|---|---|---|");
             Console.WriteLine();
-            Console.WriteLine("   COLLUMN ");
+        }
+
+        public void GetLine(int row, char winner)
+        {
+            for(int i = 1; i <= BOARD_SIZE; i++)
+            {
+                Console.Write("| ");
+                if (map[row,i] == winner)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("{0} ", map[row, i]);
+                    Console.ResetColor();
+                }
+                else Console.Write("{0} ", map[row, i]);
+            }
+            Console.Write("|\n");
+        }
+
+        public void PrintBoard(char winner)
+        {
+            Console.ResetColor();
+            Console.WriteLine(" ___ ___ ___");
+            GetLine(1,winner);
+            Console.WriteLine("|---|---|---|");
+            GetLine(2, winner);
+            Console.WriteLine("|---|---|---|");
+            GetLine(3, winner);
+            Console.WriteLine("|---|---|---|");
+            Console.WriteLine();
+        }
+
+        public void PrintGuide()
+        {
+
+            Console.WriteLine(" ___ ___ ___");
+            Console.WriteLine("| 1 | 2 | 3 |");
+            Console.WriteLine("|---|---|---|");
+            Console.WriteLine("| 4 | 5 | 6 |");
+            Console.WriteLine("|---|---|---|");
+            Console.WriteLine("| 7 | 8 | 9 |");
+            Console.WriteLine("|---|---|---|");
             Console.WriteLine();
         }
 

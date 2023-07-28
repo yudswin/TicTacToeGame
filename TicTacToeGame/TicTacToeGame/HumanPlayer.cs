@@ -9,27 +9,37 @@ namespace TicTacToeGame
 {
     public class HumanPlayer : Player
     {
+
+
         public HumanPlayer(char mark) : base(mark) { }
+        public HumanPlayer(char mark, string playerName) : base(mark, playerName) { }
 
         public sealed override void Turn(Board board)
         {
             while (true)
             {
-                Console.Write("enter ROW cordinates (1 - 3): ");
-                int row = int.Parse(Console.ReadLine());
-                Console.Write("enter COLLUMN cordinates (1 - 3): ");
-                int collumn = int.Parse(Console.ReadLine());
-
-                //  Exception 
-                row.Should().BeInRange(1, board.Map.GetLength(0));
-                collumn.Should().BeInRange(1, board.Map.GetLength(1));
-
-                if (board.NewMove(row, collumn, GetMark())) break;
-                else Console.WriteLine("error cordinates!!");
+                try
+                { 
+                    Console.Write("Enter number between 1-9: ");
+                    int num = int.Parse(Console.ReadLine());
+                    if (board.NewMove(NumToCordinate(num), GetMark())) break;
+                }
+                catch (Exception)
+                {
+                    Console.Write("Invalid Input.");
+                }
             }
-
-            
         }
+
+        public Point NumToCordinate(int num)
+        {
+            int row, collumn;
+            row = (num - 1) / 3 + 1;
+            collumn = num % 3 == 0 ? 3 : num % 3;
+
+            return new Point(row, collumn);
+
+        } 
 
         public sealed override string IsLose()
         {
