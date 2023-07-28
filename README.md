@@ -1,6 +1,6 @@
-# Tic Tac Toe (CLI) ✖️⚔️⭕
+# Tic Tac Toe (CLI)
 
-This is the ending project of Basic C# first part in my CGO courses
+This is the ending project of Basic C#.The first part of my CGO course.
 
 ## ✖️ UML diagram
 
