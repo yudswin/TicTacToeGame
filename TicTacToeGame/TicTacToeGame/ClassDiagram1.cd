@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TicTacToeGame.Program">
-    <Position X="6" Y="7.5" Width="1.5" />
+    <Position X="6.5" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
@@ -23,14 +23,14 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="TicTacToeGame.HumanPlayer">
-    <Position X="2.5" Y="7.5" Width="1.5" />
+    <Position X="3.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAAAAAAACAAAAIAAQAAAAAEAAAAAAAAA=</HashCode>
       <FileName>HumanPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TicTacToeGame.ComputerPlayer">
-    <Position X="0.5" Y="7.5" Width="1.5" />
+    <Position X="1.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAQAAAQAgAAIACAAAAIAAQAAEAAEAAAAAAAAA=</HashCode>
       <FileName>ComputerPlayer.cs</FileName>
@@ -44,21 +44,21 @@
     </TypeIdentifier>
   </Class>
   <Class Name="TicTacToeGame.TicTacToe">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+    <Position X="6.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAIAAAJCAAAAIAAAgAAgAACAACBAOJgAAAAIAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="TicTacToeGame.IPlayer">
-    <Position X="6" Y="5.25" Width="1.5" />
+    <Position X="4.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAAAAAAIAAAAACAAAAAAAQAAAAAEAAAAAAAAA=</HashCode>
       <FileName>IPlayer.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Enum Name="TicTacToeGame.Type">
-    <Position X="6" Y="3.75" Width="1.5" />
+    <Position X="4.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAAAAAAIAA=</HashCode>
       <FileName>Type.cs</FileName>
