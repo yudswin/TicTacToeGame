@@ -17,20 +17,20 @@
   <Class Name="TicTacToeGame.Player">
     <Position X="2.5" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAEAAAAAAAAIAAAAACAAAAAAAQAAAAAEAAAAAAgAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAIAAAAACAAAAAAAUAAAAAEAAQAAAhAA=</HashCode>
       <FileName>Player.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="TicTacToeGame.HumanPlayer">
-    <Position X="2.5" Y="7" Width="1.5" />
+    <Position X="2.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAMAAAAAAAAAAAAAACAAQAIAAQAAAAAEAAAAAAAAA=</HashCode>
+      <HashCode>AAAAEAAAAAAAAAAAAAACAAAAIAAQAAAAAEAAAAAAAAA=</HashCode>
       <FileName>HumanPlayer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TicTacToeGame.ComputerPlayer">
-    <Position X="0.5" Y="7" Width="1.5" />
+    <Position X="0.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAEAAAQAAAQAgAAIACAAAAIAAQAAEAAEAAAAAAAAA=</HashCode>
       <FileName>ComputerPlayer.cs</FileName>
@@ -46,7 +46,7 @@
   <Class Name="TicTacToeGame.TicTacToe">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIAIAAAJCAAAAIAAAgAAgAACAACBAEJgAAAAIAAAAA=</HashCode>
+      <HashCode>AAIAIAAAJCAAAAIAAAgAAgAACAACBAOJgAAAAIAAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>

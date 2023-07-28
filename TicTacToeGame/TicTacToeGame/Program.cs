@@ -112,6 +112,8 @@ namespace TicTacToeGame
                 }
             }
 
+            replay:
+            turn = 1;
             Console.Clear();
             Console.ResetColor();
             Console.CursorVisible = true;
@@ -130,6 +132,38 @@ namespace TicTacToeGame
                 if (currentPlayer(playerTwo, turn)) break;
                 turn++;
             }
+
+            while (true)
+            {
+                Console.CursorVisible = false;
+                Console.WriteLine("[1] replay");
+                Console.WriteLine("[2] back to menu");
+                Console.WriteLine("[3] how to play");
+                Console.WriteLine("[4] quit");
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+
+                if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
+                {
+                    goto replay;
+                }
+
+                if (keyInfo.Key == ConsoleKey.D2 || keyInfo.Key == ConsoleKey.NumPad2)
+                {
+                    Start(); break;
+                }
+
+                if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
+                {
+                    HowToPlay(); break;
+                }
+
+                if (keyInfo.Key == ConsoleKey.D4 || keyInfo.Key == ConsoleKey.NumPad4)
+                {
+                    Environment.Exit(0);
+                }
+
+            }
         }
 
         private void isDraw()
@@ -137,7 +171,7 @@ namespace TicTacToeGame
                 Console.Clear();
                 game.PrintBoard();
                 Console.WriteLine();
-                Console.WriteLine("[===] [IS A TIE] [===]");
+                Console.WriteLine("     [IS A TIE]    ");
                 Console.WriteLine();
 
         }
@@ -154,14 +188,14 @@ namespace TicTacToeGame
             Console.Write("[{0} {1}]", player.GetName(), player.GetMark());
             player.Turn(game);
             if (player.GetName() == "bot") Thread.Sleep(500);
-            if (WinCondition(player.GetMark())) return true;
+            if (WinCondition(player)) return true;
             Console.ResetColor();
             return false;
         }
 
         private void PLAYHumanAndHuman()
         {
-            turn = 1;
+            
             playerOne = new HumanPlayer('X', "playerOne");
             playerTwo = new HumanPlayer('O', "playerTwo");
 
@@ -169,7 +203,6 @@ namespace TicTacToeGame
 
         private void PLAYHumanAndBot()
         {
-            turn = 1;
             Random rnd = new Random();
             switch (rnd.Next(1, 3))
             {
@@ -187,19 +220,19 @@ namespace TicTacToeGame
 
         private void PLAYBotAndBot()
         {
-            turn = 1;
+
             playerOne = new ComputerPlayer('X');
             playerTwo = new ComputerPlayer('O');
         }
 
-        private bool WinCondition(char mark)
+        private bool WinCondition(Player player)
         {
-            if (game.Logic(mark))
+            if (game.Logic(player.GetMark()))
             {
                 Console.Clear();
-                game.PrintBoard(mark);
+                game.PrintBoard(player.GetMark());
                 Console.WriteLine();
-                Console.WriteLine("[===] [{0} IS WIN] [===]", mark);
+                Console.WriteLine("     [{0} '{1}' IS WIN]     ", player , player.GetMark());
                 Console.WriteLine();
                 return true;
             }
