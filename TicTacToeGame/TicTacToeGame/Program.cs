@@ -20,6 +20,7 @@ namespace TicTacToeGame
 
     public class TicTacToe
     {
+        private int ishuman;
         Player playerOne;
         Player playerTwo;
 
@@ -36,6 +37,7 @@ namespace TicTacToeGame
         public void Start()
         {
             Console.Clear();
+            ishuman = 0;
             int titleRow = 7;
             string[] title = new string[titleRow];
             title[0] = @" _____ ___ ____    _____  _    ____    _____ ___  _____ ";
@@ -98,19 +100,25 @@ namespace TicTacToeGame
 
                 if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
                 {
+                    ishuman = 2;
                     PLAYHumanAndHuman(); break;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D2 || keyInfo.Key == ConsoleKey.NumPad2)
                 {
+                    ishuman = 1;
                     PLAYHumanAndBot(); break;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
                 {
+
                     PLAYBotAndBot(); break;
                 }
             }
+
+            if (playerOne is HumanPlayer) PlayerSetName(playerOne);
+            if (playerTwo is HumanPlayer) PlayerSetName(playerTwo);
 
             replay:
             turn = 1;
@@ -223,6 +231,30 @@ namespace TicTacToeGame
 
             playerOne = new ComputerPlayer('X');
             playerTwo = new ComputerPlayer('O');
+        }
+
+        private void PlayerSetName(Player player)
+        {
+            Console.Clear();
+            Console.CursorVisible = true;
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Enter {0} name: ", player.GetName());
+                    string newName = Console.ReadLine();
+                    if (newName != " ")
+                    {
+                        player.SetName(newName); break;
+                    }
+                    else return;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Error name!");
+                } 
+            }
+
         }
 
         private bool WinCondition(Player player)
