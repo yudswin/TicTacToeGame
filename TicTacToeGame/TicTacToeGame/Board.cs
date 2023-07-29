@@ -54,9 +54,10 @@ namespace TicTacToeGame
 
                 if (mark == 'X') MarkXhis.Add(new Point(row, collumn));
                 else MarkYhis.Add(new Point(row, collumn));
+                Console.Beep();
                 return true;
             }
-            else return false;
+            return false;
         }
 
         public bool NewMove(Point point, char mark)

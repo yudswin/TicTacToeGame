@@ -232,7 +232,11 @@ namespace TicTacToeGame
                 Console.Clear();
                 game.PrintBoard(player.GetMark());
                 Console.WriteLine();
-                Console.WriteLine("     [{0} '{1}' IS WIN]     ", player , player.GetMark());
+                Console.WriteLine("     [{0} '{1}' IS WIN]     ", player.GetName() , player.GetMark());
+                for (int i = 37; i <= 2000; i += 200)
+                {
+                    Console.Beep(i, 100);
+                }
                 Console.WriteLine();
                 return true;
             }
