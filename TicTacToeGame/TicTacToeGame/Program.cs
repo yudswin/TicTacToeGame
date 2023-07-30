@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -15,6 +16,7 @@ namespace TicTacToeGame
             TicTacToe game = new TicTacToe();
             game.Start();
             Console.ReadKey();
+
         }
     }
 
@@ -24,6 +26,9 @@ namespace TicTacToeGame
         Player playerOne;
         Player playerTwo;
 
+        //save
+        string save = "save.txt";
+        
         HumanPlayer player = new HumanPlayer('X');
         ComputerPlayer bot = new ComputerPlayer('O');
         Board game = new Board();
@@ -32,7 +37,26 @@ namespace TicTacToeGame
         public TicTacToe()
         {
             Console.CursorVisible = false;
+            if(!File.Exists(save))
+            {
+                CreateFile(save);
+            }
         }
+
+        static void CreateFile(string filename)
+        {
+            StreamWriter writer = new StreamWriter(filename);
+            writer.Close();
+        }
+
+        static void WriteDataToFile(string filename, Player winner, Player losser)
+        {
+            StreamWriter writer = new StreamWriter(filename, true);
+            writer.WriteLine($"Winner:{winner.GetName()} vs Losser:{losser.GetName()} {DateTime.Now}");
+            writer.Close();
+        }
+
+
 
         public void Start()
         {
@@ -57,7 +81,8 @@ namespace TicTacToeGame
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("[1] Play");
             Console.WriteLine("[2] How To Play");
-            Console.WriteLine("[3] Quit");
+            Console.WriteLine("[3] Leaderboard");
+            Console.WriteLine("[4] Quit");
 
             while (true)
             {
@@ -77,10 +102,67 @@ namespace TicTacToeGame
 
                 if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
                 {
+                    LeaderBoard(); break;
+                }
+
+                if (keyInfo.Key == ConsoleKey.D4 || keyInfo.Key == ConsoleKey.NumPad4)
+                {
                     Environment.Exit(0); break;
                 }
             }
         }
+
+        private void LeaderBoard()
+        {
+            Console.Clear();
+            Queue<string> history = new Queue<string>();
+            StreamReader sr = new StreamReader(save);
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                if (history.Count > 5)
+                {
+                    history.Dequeue();
+                    history.Enqueue(line);
+                }
+                else
+                {
+                    history.Enqueue(line);
+                }
+            }
+
+            sr.Close();
+
+            Console.WriteLine("[LEADERBOARD]");
+            List<string> itemsToRemove = new List<string>();
+            foreach (string status in history)
+            {
+                Console.WriteLine(status);
+                itemsToRemove.Add(status);
+            }
+
+            // Remove the items after iterating
+            foreach (string itemToRemove in itemsToRemove)
+            {
+                history.Dequeue();
+            }
+
+            Console.WriteLine("[1] back to menu");
+
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
+                    {
+                        Start();
+                        break;
+                    }
+                }
+            }
+        }
+
 
         public void Play()
         {
@@ -265,6 +347,12 @@ namespace TicTacToeGame
                 game.PrintBoard(player.GetMark());
                 Console.WriteLine();
                 Console.WriteLine("     [{0} '{1}' IS WIN]     ", player.GetName() , player.GetMark());
+
+                if (player.GetMark() == playerOne.GetMark())
+                {
+                    WriteDataToFile(save, playerOne, playerTwo);
+                } else WriteDataToFile(save, playerOne, playerTwo);
+
                 for (int i = 37; i <= 2000; i += 200)
                 {
                     Console.Beep(i, 100);
@@ -289,7 +377,7 @@ namespace TicTacToeGame
                 HTPDiagonal();
 
                 Console.WriteLine("[HOW TO PLAY]");
-                Console.WriteLine("press [1] to back to menu");
+                Console.WriteLine("[1] back to menu");
                 if (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo keyInfo = Console.ReadKey(true);
