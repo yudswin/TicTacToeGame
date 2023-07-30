@@ -27,6 +27,15 @@ to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
 
-## License
+## Background Material
 
-[MIT](https://choosealicense.com/licenses/mit/)
+- [Tic-tac-toe](https://en.wikipedia.org/wiki/Tic-tac-toe)
+- [UML diagrams](https://www.lucidchart.com/blog/types-of-UML-diagrams)
+- [Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming)
+- [Programing language: C#](https://en.wikipedia.org/wiki/C_Sharp_(programming_language))
+- [System.IO Namespace](https://learn.microsoft.com/en-us/dotnet/api/system.io?view=net-7.0)
+- [System.Collections Namespace](https://learn.microsoft.com/en-us/dotnet/api/system.collections?view=net-7.0)
+
+
+
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
