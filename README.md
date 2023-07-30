@@ -6,7 +6,7 @@ This is the ending project of Basic C#.The first part of my CGO course.
 
 <p align="center">
     
-  <a href="https://github.com/yudswin"> <img  src="./img/ClassDiagram1.png" alt="Nguyen Quang Duy" /> </a>
+  <a href="https://github.com/yudswin"> <img  src="./img/ClassDiagram1.png" alt="Class Diagram" /> </a>
     
 </p>
 
@@ -14,9 +14,9 @@ This is the ending project of Basic C#.The first part of my CGO course.
 
 <p align="center">
     
-  <a href="https://github.com/yudswin"> <img  src="./img/ingame1.png" alt="Nguyen Quang Duy" /> </a>
-   <a href="https://github.com/yudswin"> <img  src="./img/ingame2.png" alt="Nguyen Quang Duy" /> </a>
-    <a href="https://github.com/yudswin"> <img  src="./img/ingame3.png" alt="Nguyen Quang Duy" /> </a>
+  <a href="https://github.com/yudswin"> <img  src="./img/ingame1.png" alt="Start screen" /> </a>
+   <a href="https://github.com/yudswin"> <img  src="./img/ingame2.png" alt="How to play screen" /> </a>
+    <a href="https://github.com/yudswin"> <img  src="./img/ingame3.png" alt="Gameplay" /> </a>
     
 </p>
 
