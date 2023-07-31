@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,8 +24,8 @@ namespace TicTacToeGame
     public class TicTacToe
     {
         private int ishuman;
-        Player playerOne;
-        Player playerTwo;
+        static Player playerOne;
+        static Player playerTwo;
 
         //save
         string save = "save.txt";
@@ -49,10 +50,17 @@ namespace TicTacToeGame
             writer.Close();
         }
 
-        static void WriteDataToFile(string filename, Player winner, Player losser)
+        static void WriteWinner(string filename, Player winner, Player losser)
         {
             StreamWriter writer = new StreamWriter(filename, true);
-            writer.WriteLine($"Winner:{winner.GetName()} vs Losser:{losser.GetName()} {DateTime.Now}");
+            writer.WriteLine($"[Winner] {winner.GetName()} vs [Losser] {losser.GetName()} {DateTime.Now}");
+            writer.Close();
+        }
+
+        static void WriteDraw(string filename)
+        {
+            StreamWriter writer = new StreamWriter(filename, true);
+            writer.WriteLine($"[Draw] {playerOne.GetName()} vs {playerTwo.GetName()} {DateTime.Now}");
             writer.Close();
         }
 
@@ -84,32 +92,33 @@ namespace TicTacToeGame
             Console.WriteLine("[3] Leaderboard");
             Console.WriteLine("[4] Quit");
 
-            while (true)
-            {
+            
+            
                 Console.WriteLine();
                 Console.Write("press [num] to choose option...");
+            Input:
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
                 if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
                 {
-                    Play(); break;
+                    Play(); return;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D2 || keyInfo.Key == ConsoleKey.NumPad2)
                 {
-                    HowToPlay(); break;
+                    HowToPlay(); return;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
                 {
-                    LeaderBoard(); break;
+                    LeaderBoard(); return;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D4 || keyInfo.Key == ConsoleKey.NumPad4)
                 {
-                    Environment.Exit(0); break;
+                    Environment.Exit(0); 
                 }
-            }
+            goto Input;
         }
 
         private void LeaderBoard()
@@ -178,21 +187,21 @@ namespace TicTacToeGame
             {
                 Console.WriteLine();
                 Console.Write("press [num] to choose option...");
-                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                ConsoleKeyInfo key = Console.ReadKey(true);
 
-                if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
+                if (key.Key == ConsoleKey.D1 || key.Key == ConsoleKey.NumPad1)
                 {
                     ishuman = 2;
                     PLAYHumanAndHuman(); break;
                 }
 
-                if (keyInfo.Key == ConsoleKey.D2 || keyInfo.Key == ConsoleKey.NumPad2)
+                if (key.Key == ConsoleKey.D2 || key.Key == ConsoleKey.NumPad2)
                 {
                     ishuman = 1;
                     PLAYHumanAndBot(); break;
                 }
 
-                if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
+                if (key.Key == ConsoleKey.D3 || key.Key == ConsoleKey.NumPad3)
                 {
 
                     PLAYBotAndBot(); break;
@@ -223,16 +232,13 @@ namespace TicTacToeGame
                 turn++;
             }
 
-            while (true)
-            {
                 Console.CursorVisible = false;
                 Console.WriteLine("[1] replay");
                 Console.WriteLine("[2] back to menu");
                 Console.WriteLine("[3] how to play");
                 Console.WriteLine("[4] quit");
+            Input:
                 ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
-
                 if (keyInfo.Key == ConsoleKey.D1 || keyInfo.Key == ConsoleKey.NumPad1)
                 {
                     goto replay;
@@ -240,12 +246,12 @@ namespace TicTacToeGame
 
                 if (keyInfo.Key == ConsoleKey.D2 || keyInfo.Key == ConsoleKey.NumPad2)
                 {
-                    Start(); break;
+                    Start(); return;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D3 || keyInfo.Key == ConsoleKey.NumPad3)
                 {
-                    HowToPlay(); break;
+                    HowToPlay(); return;
                 }
 
                 if (keyInfo.Key == ConsoleKey.D4 || keyInfo.Key == ConsoleKey.NumPad4)
@@ -253,7 +259,7 @@ namespace TicTacToeGame
                     Environment.Exit(0);
                 }
 
-            }
+                goto Input;
         }
 
         private void isDraw()
@@ -262,6 +268,7 @@ namespace TicTacToeGame
                 game.PrintBoard();
                 Console.WriteLine();
                 Console.WriteLine("     [IS A TIE]    ");
+                WriteDraw(save);
                 Console.WriteLine();
 
         }
@@ -350,8 +357,8 @@ namespace TicTacToeGame
 
                 if (player.GetMark() == playerOne.GetMark())
                 {
-                    WriteDataToFile(save, playerOne, playerTwo);
-                } else WriteDataToFile(save, playerOne, playerTwo);
+                    WriteWinner(save, playerOne, playerTwo);
+                } else WriteWinner(save, playerOne, playerTwo);
 
                 for (int i = 37; i <= 2000; i += 200)
                 {
